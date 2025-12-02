@@ -1,0 +1,24 @@
+{
+  "name": "ai-study-buddy",
+  "version": "0.1.0",
+  "main": "backend/electron/main.js",
+  "private": true,
+  "scripts": {
+    "install:all": "npm --prefix frontend/app install && npm --prefix backend install",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend/app run dev",
+    "dev:electron": "cross-env NODE_ENV=development electron .",
+    "wait-and-electron": "wait-on http://localhost:5173 && npm run dev:electron",
+    "dev": "concurrently -k \"npm:dev:backend\" \"npm:dev:frontend\" \"npm:wait-and-electron\"",
+    "build:frontend": "npm --prefix frontend/app run build",
+    "build:backend": "npm --prefix backend run build",
+    "dist": "npm run build:frontend && electron-builder"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^26.0.0",
+    "electron-builder": "^24.6.0",
+    "wait-on": "^7.2.0"
+  }
+}
